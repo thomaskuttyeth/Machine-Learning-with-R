@@ -1,6 +1,7 @@
 # Machine learning in R
 
-This repo contains machine learning stuffs using R programming. 
+
+This repo contains machine learning stuffs using R programming.
 
 ### Contents
 
