@@ -1,7 +1,5 @@
 # Machine learning in R
 
-
-
 This repo contains machine learning stuffs using R programming.
 
 ### Contents
@@ -9,5 +7,3 @@ This repo contains machine learning stuffs using R programming.
 * Logistic Regression
 * Ridge Regression
 * Linear Regression
-
-**
