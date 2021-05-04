@@ -88,3 +88,7 @@ test_roc = roc(final.test$class ~ test_prob, plot = TRUE, print.auc = TRUE)
 # represents worth less classifier .
 # AUC is 0.9423 means that there is 94.23% chance that model will be able to distinguish between positive class and
 # negative class.
+
+
+
+

@@ -37,7 +37,7 @@ corrplot(correlation.train,method = 'color')
 
 
 # creating the first model 
-lm_model1 = lm(Profit~R.D.Spend+Administration+Marketing.Spend,data = train)
+lm_model1 = lm(Profit~  R.D.Spend+Administration+Marketing.Spend,data = train)
 # getting the summary of the first model
 summary(lm_model1)
 
@@ -91,31 +91,4 @@ sse = sum((result$pred - result$real)^2)
 sst = sum((mean(test$Profit) - result$real)^2)
 r2 = 1 - sse/sst
 print(r2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
