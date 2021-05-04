@@ -1,0 +1,103 @@
+---
+title: "r_lab_CIA- Thomaskutty_20122011"
+output: html_notebook
+---
+# Importing libraries 
+```{r message=FALSE, warning=FALSE}
+library(Amelia)   # missing value plotting 
+library(ggplot2)  # visualization 
+library(caTools)  # for train test split 
+library(rpart.plot) # decision tree plotting 
+library(rpart)  # decision tree models 
+library(caret) # for confusion matrix 
+library(corrplot)  # for plotting the correlation 
+library(pROC) # to build the roc curve
+library(e1071) # dependency for printing confusion matrix
+library(dplyr) # for data analysis 
+```
+
+# Importing the dataset 
+```{r paged.print=FALSE}
+# loading the car evaluation dataset from web (already published in web)
+df = read.csv(url('https://docs.google.com/spreadsheets/d/e/2PACX-1vRipIHGd3kxIKHLyyopTFBUSiGWhiARYJQz28tGiwFbVoQMNGXlD-oBLq2lYpiTlleI53Z3edwAe9U8/pub?gid=1071454197&single=true&output=csv'))
+head(df)
+```
+# Splitting into train and test 
+Note: We have to train the model using the train data. Since we dont have seperate test and train data, we have to first split the entire data into train and test with  80:20 ratio. Our trained model should not see the test data during the training or preprocessing part, thats why we do this split just after loading the dataframe. We use caTools package for the splitting. 
+
+```{r message=FALSE, warning=FALSE}
+# we attach the dataframe for easy access of the column names in this notebook
+attach(df)
+sample = sample.split(df$decision,SplitRatio = 0.8)
+df.train = subset(df, sample == TRUE)
+df.test = subset(df, sample == FALSE)
+```
+
+Now we just print the dimensions of the train and test data.
+```{r}
+print(dim(df.train))
+print(dim(df.test))
+```
+So, we got sufficient amount of data for training the model and validation. 
+Now its the time of preprocessing and exploratory data analysis using the train data.
+
+# Structure of the data
+```{r}
+str(df.train)
+```
+We have seven variables in total: All of them are charactor datatype. But out of them, number of doors and number of persons should be numerical. So, they should be converted to numerical datatype.
+
+```{r message=FALSE, warning=FALSE}
+# converting the number of doors and number of persons features into integer type
+df.train$number.of.doors = as.integer(df.train$number.of.doors)
+df.train$number.of.persons = as.integer(df.train$number.of.persons)
+```
+
+Lets see the summary of the train dataset
+```{r}
+summary(df.train)
+```
+SO we have the five number summary of the numberical features (no.of.door and no.of.persons)
+
+# Handling the missing values 
+```{r}
+colSums(is.na(df.train))
+```
+Out of 1382 training data we have 343 missing values in number.of.doors feature and 469 missing values in number.of.persons feature. 
+Since, we dont have much training data, it is better to replace the null values. 
+lets analyse those features using barplot(for easy visualization)
+```{r message=FALSE, warning=FALSE}
+ggplot(data = df.train, aes(df.train$number.of.doors)) + geom_bar(aes(fill = df.train$decision)) + theme_minimal() 
+```
+Since the labels 2,3,4 have almost same counts we cant replace it with mode, here lets try imputing the missing values with random sampling replacement 
+
+```{r paged.print=FALSE}
+# selecting the data where no.of.doors is nan, 
+doors_na = df.train %>% filter(is.na(df.train$number.of.doors) == TRUE)
+head(doors_na)
+```
+
+```{r}
+# first getting the unique no of values in the doors feature
+no_doors = unique(df.train$number.of.doors)
+# removing the null from that vector
+no_doors = na.omit(no_doors)
+# now generating random doors values 
+random_no_doors = sample(no_doors,dim(doors_na)[1], replace = TRUE)
+
+# now replacing the nulls of doors featue in the original 
+# dataframe (df.train) with the generated random_no_doors
+df.train[is.na(df.train$number.of.doors), ] = random_no_doors
+```
+
+So, we have replaced the number.of.doors null values (random sampling replacement)
+lets now work on the number.of.persons feature
+
+```{r message=FALSE, warning=FALSE}
+ggplot(data = df.train, aes(df.train$decision)) + geom_bar(aes(fill = number.of.persons)) + theme_minimal() 
+```
+
+
+
+
+
