@@ -10,7 +10,7 @@ file = list.files('/home/thomaskutty/textfiles folder/')
 print(head(files))
 
 # ggetting the path of each text file in the directory 
-filename = glue(folder path, files(1), sep = '')
+filename = glue(folderpath, files(1), sep = '')
 head(filename)
 
 # removing the trail spaces 
