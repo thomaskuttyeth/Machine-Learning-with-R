@@ -31,7 +31,7 @@ sample = sample.split(data1$Condition, SplitRatio = 0.70)
 train = subset(data1, sample == TRUE) 
 test = subset(data1, sample == FALSE) 
 summary(train) 
-summary(test)
+summary(test) 
 ```
 
 ```{r}
