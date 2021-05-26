@@ -3,11 +3,11 @@ title: "Naive Bayes classifier"
 output: html_notebook
 ---
 # Naive Bayes Classifier 
-Naive bayes assume independence of features. It can also be used with continuous variables. If all the input features are categorical naive bayes is recommended.In the case of numerical featues it makes another stron assumption whih is that the numberical variable is normally distributed. 
+Naive bayes assume independence of features. It can also be used with continuous variables. If all the input features are categorical naive bayes is recommended.In the case of numerical features it makes another strong assumption with is that the numerical variable is normally distributed. 
 
 # Loading major libraries 
 ```{r message=FALSE, warning=FALSE}
-library(caret) # conf matrix and splitting 
+library(caret) # confusion matrix and splitting 
 library(caTools)
 library(dplyr) # data preprocessing 
 library(tidyverse) # data preprocessing 
@@ -44,7 +44,7 @@ titanic  = titanic %>% mutate_if(is.integer, as.factor)
 titanic = titanic %>% select(-name, -boat, -home.dest, -ticket,-cabin)
 titanic$age = as.factor(as.integer(titanic$age))
 titanic$sex = as.factor(titanic$sex)
-titanic$embarked = as.factor(titanic$embarked
+titanic$embarked = as.factor(titanic$embarked)
 str(titanic)
 ```
 # Getting data description 

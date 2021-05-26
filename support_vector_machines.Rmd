@@ -55,12 +55,12 @@ str(training_heart$target)
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(klaR)
 # repeated cross validation 
-train_ctl = trainControl(method = 'repeatedcv', number = 10, repeats = 3) 
+tc = trainControl(method = 'repeatedcv', number = 10, repeats = 3) 
 set.seed(20)
-svm_model = train(target~. , data = training_heart, method = 'svmLinear', trainControl = train_ctl, 
+svm_model = train(target~. , data = training_heart, method = 'svmLinear', trControl = tc, 
                   preProcess = c('center', 'scale'), tuneLength = 10)
 
-# the preprocessing paramter is for centering and scaling the training data 
+# the preprocessing parameter is for centering and scaling the training data 
 ```
 # Printing the model output 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
