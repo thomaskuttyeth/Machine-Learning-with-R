@@ -1,7 +1,6 @@
 
 library(datarium)
 
-
 # loading the data 
 df = marketing
 
@@ -27,6 +26,13 @@ summary(model)
 # generating predicted values and checking residual plot 
 preds = predict(model)
 plot(preds, res)
+
+# creating the multiple regression model(model_mlr)
+library(datarium)
+df = marketing
+model_mlr = lm(sales ~. , data = df)
+summary(model_mlr)
+
 
 # formal testing of heteroskedasticity (breusch pagan test - imtest package)
 library(lmtest)
