@@ -75,7 +75,6 @@ we can infer that the if ffmc is less than 88 than 15%
 ```{r}
 par(mfrow = c(1,2))
 rsq.rpart(df.fit)
-
 ```
 we have trained our tree -fit using all the variables in the dataset. Above we see how the function rpart creates multiple tree and compares all the result to select the tree that contains least error and provides us with better model with higher accuracy and finally use it. 
 Above we can see the graphical representation of the different trees created and how the best tree that gives less error is choosen. 
