@@ -1,7 +1,7 @@
 
 
 # loading the dataset 
-df.train <- read.csv('admission.csv')
+df.train <- read.csv('/home/thomaskutty/Gitrepo/Machine-Learning-with-R/data_fold/admission.csv')
 df.train <- subset(df.train, select = -c(Serial.No.) )
 # print(head(df.train))
 
